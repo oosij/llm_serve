@@ -13,7 +13,6 @@ class ChatApp:
         self.initialize_session_state()
 
     def setup_streamlit(self):
-        """Setup Streamlit UI components"""
         st.markdown(
             """
             <style>
@@ -31,14 +30,11 @@ class ChatApp:
         st.markdown('<h1 class="title-style">Hello, ThinkAI!</h1>', unsafe_allow_html=True)
 
     def initialize_session_state(self):
-        """Initialize session state variables"""
         if 'chat_history' not in st.session_state:
             st.session_state.chat_history = []
 
     @property
     def system_message(self):
-        """Define system message with instructions"""
-
         sys_msg = """<SYS>당신은 금융 투자 증권 지식에 해박한 친절한 AI, ThinkAI입니다. instruction을 기반으로 질문에 성실히 답변하세요."""
         inst_msg = """
         \n### instruction
@@ -54,7 +50,6 @@ class ChatApp:
         return sys_msg + inst_msg
 
     def handle_api_response(self, response, message_placeholder):
-        """Handle streaming API response"""
         full_response = ""
         try:
             for chunk in response.iter_content(chunk_size=None, decode_unicode=True):
@@ -117,8 +112,7 @@ class ChatApp:
 
         
         st.session_state.chat_history = context_limit_count(st.session_state.chat_history, self.system_message)
-     
-
+    
         st.session_state.chat_history.append({
             "role": "user",
             "content": user_message
@@ -135,13 +129,11 @@ class ChatApp:
             return None
 
     def display_chat_history(self, empty_space):
-        """Display all messages in chat history"""
         with empty_space.container():
             for i, message in enumerate(st.session_state.chat_history):
                 self.display_message(message, i == 0)
 
     def run(self):
-        """Run the chat application"""
         empty_space = st.empty()
         user_input = st.chat_input("질문을 입력하세요.")
 
