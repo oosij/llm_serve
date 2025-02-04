@@ -110,9 +110,7 @@ class ChatApp:
         else:
             user_message = user_input
 
-        
         st.session_state.chat_history = context_limit_count(st.session_state.chat_history, self.system_message)
-    
         st.session_state.chat_history.append({
             "role": "user",
             "content": user_message
