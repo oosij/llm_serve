@@ -42,7 +42,6 @@ def context_limit_count(chatml, inst_msg):
             ]
             chatml_add = tokenizer.apply_chat_template(chat_add, tokenize=False, add_generation_prompt=True)
 
-            # 요약 API 호출
             pre_summary = inference_stream_off(chatml_add)
             print(chatml[-1]['content'])
             last_answer = chatml[-1]['content']
